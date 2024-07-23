@@ -25,7 +25,7 @@ def docker_remote_api_if(res, uri):
     if res and res.status_code == 200 and 'docker.io' in res.text:
         print(f'{Fore.GREEN}[+] {uri} 存在docker API未授权{Style.RESET_ALL}')
         return True
-    print(f'{Fore.RED}[-] {uri} 未检测到未授权的docker API{Style.RESET_ALL}')
+    print(f'[-] {uri} 未检测到未授权的docker API')
     return False
 
 
@@ -68,7 +68,7 @@ if __name__ == '__main__':
                                                                             By Catherines77
     \n""")
 
-    if len(sys.argv) != 5 or (sys.argv[1] != '-u' and sys.argv[1] != '-f') or (
+    if len(sys.argv) < 2 or sys.argv[1] == '-h' or (sys.argv[1] != '-u' and sys.argv[1] != '-f') or (
             sys.argv[1] == '-f' and sys.argv[3] != '-o'):
         print('Usage: python docker_api_unauth_detect.py <-u> <url> <-o> <output_file>' + '\n')
         print('Param: -u: a single target url')

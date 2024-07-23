@@ -3,8 +3,8 @@ Docker romote api unauthorized exploit by serveral simple python scripts
 The current detection script supports batch detection
 For specific usage, please see the -h parameter.
 ## Single detection
-![image](https://github.com/user-attachments/assets/4bb53824-4f0d-46a1-bae7-48e1a4e0e2c0)
+![image](https://github.com/user-attachments/assets/891a2b58-a94d-48b4-9730-08f0993e3ab4)
 ## Batch detection
-![image](https://github.com/user-attachments/assets/94d247d9-e931-4b02-bf4e-14e98cbe6118)
+![image](https://github.com/user-attachments/assets/125c55b0-27eb-4708-9455-864601a136a6)
 ## exploit script
 ![image](https://github.com/user-attachments/assets/f1b605cf-8dd1-47c2-a09c-f9a258343567)

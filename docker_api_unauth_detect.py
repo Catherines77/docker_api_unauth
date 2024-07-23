@@ -66,6 +66,7 @@ if __name__ == '__main__':
 |____/ \___/ \___|_|\_\___|_|    /_/   \_\_|  |___|   \___/|_| |_|\__,_|\__,_|\__|_| |_|
 
                                                                             By Catherines77
+                                                                            https://github.com/Catherines77/docker_api_unauth
     \n""")
 
     if len(sys.argv) < 2 or sys.argv[1] == '-h' or (sys.argv[1] != '-u' and sys.argv[1] != '-f') or (

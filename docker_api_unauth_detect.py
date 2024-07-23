@@ -15,17 +15,17 @@ def docker_remote_api_res(uri):
         res = requests.get(url, headers=headers, timeout=5)
         return res
     except Timeout:
-        print(f"{Fore.RED}[-] {uri} 请求超时{Style.RESET_ALL}")
+        print(f"{Fore.RED}[-] {uri} Request timeout{Style.RESET_ALL}")
     except RequestException as e:
-        print(f"{Fore.RED}[-] {uri} 请求失败: {e}{Style.RESET_ALL}")
+        print(f"{Fore.RED}[-] {uri} Request fail: {e}{Style.RESET_ALL}")
     return None
 
 
 def docker_remote_api_if(res, uri):
     if res and res.status_code == 200 and 'docker.io' in res.text:
-        print(f'{Fore.GREEN}[+] {uri} 存在docker API未授权{Style.RESET_ALL}')
+        print(f'{Fore.GREEN}[+] {uri} Docker API Unauth detected{Style.RESET_ALL}')
         return True
-    print(f'[-] {uri} 未检测到未授权的docker API')
+    print(f'[-] {uri} Docker API Unaut not detected')
     return False
 
 
@@ -40,19 +40,19 @@ def process_urls(url_file, output_file):
                     if docker_remote_api_if(res, uri):
                         valid_urls.append(uri)
     except FileNotFoundError:
-        print(f"{Fore.RED}[-] 文件 '{url_file}' 未找到{Style.RESET_ALL}")
+        print(f"{Fore.RED}[-] File '{url_file}' not found{Style.RESET_ALL}")
         return []
     except IOError as e:
-        print(f"{Fore.RED}[-] 文件读取错误: {e}{Style.RESET_ALL}")
+        print(f"{Fore.RED}[-] File read error: {e}{Style.RESET_ALL}")
         return []
 
     try:
         with open(output_file, 'w') as f:
             for url in valid_urls:
                 f.write(url + '\n')
-        print(f'{Fore.GREEN}[+] 有效的URL已保存到 {output_file}{Style.RESET_ALL}')
+        print(f'{Fore.GREEN}[+] Valid urls has been saved to {output_file}{Style.RESET_ALL}')
     except IOError as e:
-        print(f"{Fore.RED}[-] 文件写入错误: {e}{Style.RESET_ALL}")
+        print(f"{Fore.RED}[-] File write error: {e}{Style.RESET_ALL}")
 
     return valid_urls
 

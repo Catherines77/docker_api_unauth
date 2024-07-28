@@ -1,10 +1,14 @@
 # docker_api_unauth
+通过几个python脚本来利用docker api未授权
 Docker romote api unauthorized exploit by serveral simple python scripts
-The current detection script supports batch detection
-For specific usage, please see the -h parameter.
-## Single detection
-![image](https://github.com/user-attachments/assets/891a2b58-a94d-48b4-9730-08f0993e3ab4)
-## Batch detection
-![image](https://github.com/user-attachments/assets/125c55b0-27eb-4708-9455-864601a136a6)
-## exploit script
-![image](https://github.com/user-attachments/assets/f1b605cf-8dd1-47c2-a09c-f9a258343567)
+## 当前存在两个脚本
+There are currently two scripts.
+
+### 1.docker_detect.py
+检测是否存在未授权
+Check whether there is unauthorized.
+
+### 2.host_exp.py
+获取宿主机权限脚本(当前只支持通过公钥写入getshell)
+Obtain host permission script (currently only supports writing getshell through public key).
+![image](https://github.com/user-attachments/assets/7e95aa7f-d152-4328-a40c-1d414d3e380c)

